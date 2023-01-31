@@ -1,10 +1,30 @@
 package com.newlecture.web.entity;
 
+import java.sql.DriverManager;
+
 public class Menu {
 	private int id;
 	private String name;
 	private int price;
 	private String img;
+	
+	static {
+		
+	}
+	
+	public Menu() {
+		Menu menu = new Menu();
+		DriverManager.registerDriver(this);
+	}
+	
+	public Menu(int id, String name, int price, String img) {
+		super();
+		this.id = id;
+		this.name = name;
+		this.price = price;
+		this.img = img;
+	}
+	
 	public int getId() {
 		return id;
 	}
@@ -35,13 +55,6 @@ public class Menu {
 		return "Menu [id=" + id + ", name=" + name + ", price=" + price + ", img=" + img + "]";
 	}
 	
-	public Menu(int id, String name, int price, String img) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.price = price;
-		this.img = img;
-	}
 	
 	
 	// 생성자(기본, 오버로드) 
