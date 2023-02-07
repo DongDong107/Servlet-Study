@@ -16,7 +16,7 @@ public class JDBCProgram {
 		Scanner sc = new Scanner(System.in);
 		System.out.print("회원 이름 입력:");
 		String name = sc.nextLine(); 
-		System.out.println("ID         "+"이름        "+"별명          ");
+		System.out.println("ID         "+"이름                  "+"별명          ");
 		
 		Class.forName("oracle.jdbc.driver.OracleDriver");
 		
@@ -35,7 +35,7 @@ public class JDBCProgram {
 			int id = rs.getInt("id");
 			String dbname = rs.getString("name");
 			String nicName = rs.getString("nicname");
-			String printrs =  String.format("%d       "+"%s          "+"%s         ",id,dbname,nicName);
+			String printrs =  String.format("%d         "+"%s                  "+"%s          ",id,dbname,nicName);
 			System.out.println(printrs);
 		}
 		
