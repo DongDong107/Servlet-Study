@@ -14,7 +14,7 @@ public class Menu {
 	
 	public Menu() {
 		Menu menu = new Menu();
-		DriverManager.registerDriver(this);
+//		DriverManager.registerDriver(this);
 	}
 	
 	public Menu(int id, String name, int price, String img) {

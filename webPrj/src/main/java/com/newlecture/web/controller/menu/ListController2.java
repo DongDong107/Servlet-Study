@@ -7,8 +7,11 @@ import java.sql.DriverManager;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.newlecture.web.entity.GList;
+import com.newlecture.web.entity.Menu;
 import com.newlecture.web.service.MenuService;
 
 import jakarta.servlet.ServletException;
@@ -18,11 +21,14 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
 @WebServlet("/menu/list")
-public class ListController extends HttpServlet{
+public class ListController2 extends HttpServlet{
 	
 	private MenuService service;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		GList<Menu> menus = new GList<Menu>();
+		
+//		NList menus = new NList();
 		
 		resp.setCharacterEncoding("UTF-8");
 		//브라우저에서 html로 읽고 UTF-8로 읽어라 하고 헤더에 넣어줌.
@@ -45,21 +51,11 @@ public class ListController extends HttpServlet{
 			Statement st = con.createStatement();
 			ResultSet rs = st.executeQuery(sql);
 			
-			out.write("<!DOCTYPE html>");
-			out.write("<html>");
-			out.write("<head>");
-			out.write("<meta charset=\"UTF-8\">");
-			out.write("<title>Insert title here</title>");
-			out.write("</head>");
-			out.write("<body>");
-			out.write("<h1>메뉴 목록</h1>");
-			out.write("<table>");
-			out.write("<tr>");
-			out.write("<td>번호</td>");
-			out.write("<td>이름</td>");
-			out.write("<td>가격</td>");		
-			out.write("</tr>");
-				
+//			Menu[] menus = new Menu[100];
+			List<Menu> list = new ArrayList<>();
+			
+			
+			
 			// 필터링, 집계, 정렬
 			while(rs.next())	// 서버의 커서를 한칸 내리고 그 위치의 레코드를 옮겨 오는 것. -> 레코드 하나가 저장되는 공간은?
 			{
@@ -67,21 +63,11 @@ public class ListController extends HttpServlet{
 				String name = rs.getString("name");
 				String nicName = rs.getString("nicname");
 				
-//				out.println("<table>");
-//				out.println("<tr>");				
-				String format = String.format("id:%d, name:%s, nicname:%s\n" , id, name, nicName);
-				out.println(format + "<br >");
-				System.out.println(format);
-//				out.println("</tr>");
-//				out.println("</table>");
+				Menu menu = new Menu(id, name, 1000, "");
 				
-				out.write("<tr>");	
-				out.write("	<td>"+id+"</td>");	
-				out.write("	<td>"+name+"</td>");	
-				out.write("	<td>5000</td>");				
-				out.write("</tr>");	
-						
-					
+				menus.add(menu);
+				
+//				menus.add(3);
 			}
 			
 			con.close();
@@ -92,6 +78,34 @@ public class ListController extends HttpServlet{
 		} catch (SQLException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+		
+//		============================================
+		
+		out.write("<!DOCTYPE html>");
+		out.write("<html>");
+		out.write("<head>");
+		out.write("<meta charset=\"UTF-8\">");
+		out.write("<title>Insert title here</title>");
+		out.write("</head>");
+		out.write("<body>");
+		out.write("<h1>메뉴 목록</h1>");
+		out.write("<table>");
+		out.write("<tr>");
+		out.write("<td>번호</td>");
+		out.write("<td>이름</td>");
+		out.write("<td>가격</td>");		
+		out.write("</tr>");
+		
+		for(int i=0; i<menus.size(); i++) {
+			// 형식 변환
+			Menu m = (Menu) menus.get(i);
+			
+		out.write("<tr>");	
+		out.write("	<td>"+m.getId()+"</td>");	
+		out.write("	<td>"+m.getName()+"</td>");	
+		out.write("	<td>5000</td>");				
+		out.write("</tr>");
 		}
 		
 		out.write("</table>");	
