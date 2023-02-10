@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/menu/list")
+@WebServlet("/menu/list2")
 public class ListController2 extends HttpServlet{
 	
 	private MenuService service;
