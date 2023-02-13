@@ -20,7 +20,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-@WebServlet("/menu/listView")
+@WebServlet("/menu/listview")
 public class ListView extends HttpServlet{
 	
 	private MenuService service;
@@ -35,7 +35,8 @@ public class ListView extends HttpServlet{
 		resp.setContentType("text/html; charset=UTF-8");
 		
 		PrintWriter out = resp.getWriter();
-
+		
+		List<Menu> menus = (List<Menu>) req.getAttribute("menus");
 //		============================================
 		
 		out.write("<!DOCTYPE html>");
@@ -53,16 +54,16 @@ public class ListView extends HttpServlet{
 		out.write("<td>가격</td>");		
 		out.write("</tr>");
 		
-//		for(int i=0; i<menus.size(); i++) {
-//			// 형식 변환
-//			Menu m = (Menu) menus.get(i);
+		for(int i=0; i<menus.size(); i++) {
+			// 형식 변환
+			Menu m = menus.get(i);
 			
 		out.write("<tr>");	
-//		out.write("	<td>"+m.getId()+"</td>");	
-//		out.write("	<td>"+m.getName()+"</td>");	
+		out.write("	<td>"+m.getId()+"</td>");	
+		out.write("	<td>"+m.getName()+"</td>");	
 		out.write("	<td>5000</td>");				
 		out.write("</tr>");
-//		}
+		}
 		
 		out.write("</table>");	
 		out.write("</body>");	

@@ -26,7 +26,7 @@ public class ListController2 extends HttpServlet{
 	private MenuService service;
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		GList<Menu> menus = new GList<Menu>();
+//		GList<Menu> menus = new GList<Menu>();
 		
 //		NList menus = new NList();
 		
@@ -42,7 +42,7 @@ public class ListController2 extends HttpServlet{
 
 		String query = "";
 		String sql = String.format("select * from member where nicname like '%s'", "%"+query+"%") ;
-		
+		List<Menu> menus = new ArrayList<>();
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String url = "jdbc:oracle:thin:@oracle.newlecture.com:1521/xepdb1";
@@ -52,7 +52,7 @@ public class ListController2 extends HttpServlet{
 			ResultSet rs = st.executeQuery(sql);
 			
 //			Menu[] menus = new Menu[100];
-			List<Menu> list = new ArrayList<>();
+			
 			
 			
 			
@@ -80,37 +80,43 @@ public class ListController2 extends HttpServlet{
 			e.printStackTrace();
 		}
 		
+//		resp.sendRedirect("listview");
+		
+		//request에 담아둠.
+		req.setAttribute("menus", menus);
+		
+		req.getRequestDispatcher("listview").forward(req, resp);
 //		============================================
 		
-		out.write("<!DOCTYPE html>");
-		out.write("<html>");
-		out.write("<head>");
-		out.write("<meta charset=\"UTF-8\">");
-		out.write("<title>Insert title here</title>");
-		out.write("</head>");
-		out.write("<body>");
-		out.write("<h1>메뉴 목록</h1>");
-		out.write("<table>");
-		out.write("<tr>");
-		out.write("<td>번호</td>");
-		out.write("<td>이름</td>");
-		out.write("<td>가격</td>");		
-		out.write("</tr>");
-		
-		for(int i=0; i<menus.size(); i++) {
-			// 형식 변환
-			Menu m = (Menu) menus.get(i);
-			
-		out.write("<tr>");	
-		out.write("	<td>"+m.getId()+"</td>");	
-		out.write("	<td>"+m.getName()+"</td>");	
-		out.write("	<td>5000</td>");				
-		out.write("</tr>");
-		}
-		
-		out.write("</table>");	
-		out.write("</body>");	
-		out.write("</html>");	
+//		out.write("<!DOCTYPE html>");
+//		out.write("<html>");
+//		out.write("<head>");
+//		out.write("<meta charset=\"UTF-8\">");
+//		out.write("<title>Insert title here</title>");
+//		out.write("</head>");
+//		out.write("<body>");
+//		out.write("<h1>메뉴 목록</h1>");
+//		out.write("<table>");
+//		out.write("<tr>");
+//		out.write("<td>번호</td>");
+//		out.write("<td>이름</td>");
+//		out.write("<td>가격</td>");		
+//		out.write("</tr>");
+//		
+//		for(int i=0; i<menus.size(); i++) {
+//			// 형식 변환
+//			Menu m = (Menu) menus.get(i);
+//			
+//		out.write("<tr>");	
+//		out.write("	<td>"+m.getId()+"</td>");	
+//		out.write("	<td>"+m.getName()+"</td>");	
+//		out.write("	<td>5000</td>");				
+//		out.write("</tr>");
+//		}
+//		
+//		out.write("</table>");	
+//		out.write("</body>");	
+//		out.write("</html>");	
 		
 	}
 }
