@@ -30,12 +30,14 @@ public class ListController2 extends HttpServlet{
 //		GList<Menu> menus = new GList<Menu>();
 		
 //		NList menus = new NList();
+		List<Menu> menus = null; new ArrayList<>();
+		
+		PrintWriter out = resp.getWriter();
 		
 		resp.setCharacterEncoding("UTF-8");
 		//브라우저에서 html로 읽고 UTF-8로 읽어라 하고 헤더에 넣어줌.
 		resp.setContentType("text/html; charset=UTF-8");
 		
-		PrintWriter out = resp.getWriter();
 		out.print("hello");
 		
 //		Menu[] list = service.getList();
@@ -43,7 +45,6 @@ public class ListController2 extends HttpServlet{
 
 		String query = "";
 		String sql = String.format("select * from member where nicname like '%s'", "%"+query+"%") ;
-		List<Menu> menus = new ArrayList<>();
 		try {
 			Class.forName("oracle.jdbc.driver.OracleDriver");
 			String url = "jdbc:oracle:thin:@oracle.newlecture.com:1521/xepdb1";
