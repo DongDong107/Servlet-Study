@@ -1,12 +1,15 @@
 package com.newlecture.web.entity;
 
 import java.sql.DriverManager;
+import java.util.Date;
 
 public class Menu {
 	private int id;
 	private String name;
 	private int price;
 	private String img;
+	private Date regDate;
+	private String images;
 	
 	static {
 		
@@ -15,16 +18,19 @@ public class Menu {
 	public Menu() {
 		Menu menu = new Menu();
 //		DriverManager.registerDriver(this);
-	}
+	}	
 	
-	public Menu(int id, String name, int price, String img) {
+	public Menu(int id, String name, int price, String img, Date regDate, String images) {
 		super();
 		this.id = id;
 		this.name = name;
 		this.price = price;
 		this.img = img;
+		this.regDate = regDate;
+		this.images = images;
 	}
-	
+
+
 	public int getId() {
 		return id;
 	}
@@ -49,11 +55,29 @@ public class Menu {
 	public void setImg(String img) {
 		this.img = img;
 	}
+	public Date getRegDate() {
+		return regDate;
+	}
+	public void setRegDate(Date regDate) {
+		this.regDate = regDate;
+	}
 	
+
+	public String getImages() {
+		return images;
+	}
+
+	public void setImages(String images) {
+		this.images = images;
+	}
+
 	@Override
 	public String toString() {
-		return "Menu [id=" + id + ", name=" + name + ", price=" + price + ", img=" + img + "]";
+		return "Menu [id=" + id + ", name=" + name + ", price=" + price + ", img=" + img + ", regDate=" + regDate
+				+ ", images=" + images + "]";
 	}
+
+	
 	
 	
 	

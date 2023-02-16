@@ -8,6 +8,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 import com.newlecture.web.entity.GList;
@@ -62,8 +63,11 @@ public class ListController2 extends HttpServlet{
 				int id = rs.getInt("id");
 				String name = rs.getString("name");
 				String nicName = rs.getString("nicname");
+				Date regdate = rs.getDate("reg_date");
+				String images = "pic1.png,pic2.png,pic3.png,pic4.png,pic5.png";
 				
-				Menu menu = new Menu(id, name, 1000, "");
+				Menu menu = new Menu(id, name, 1000, "", regdate, images);
+				menu.setImages(images);
 				
 				menus.add(menu);
 				
