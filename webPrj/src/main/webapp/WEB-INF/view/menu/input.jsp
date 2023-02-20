@@ -27,7 +27,7 @@
 	<a href="/input?p=2&q=hello&s=15">3</a>
 	<br>
 
-	<form action="/input">
+	<form action="/input" >
 		<fieldset>
 			<legend>쿼리 값</legend>
 			<label>page:</label> 

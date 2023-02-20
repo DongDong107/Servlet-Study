@@ -11,7 +11,6 @@ import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
-import com.newlecture.web.entity.GList;
 import com.newlecture.web.entity.Menu;
 import com.newlecture.web.service.MenuService;
 
@@ -20,6 +19,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 
 @WebServlet("/menu/list2")
 public class ListController2 extends HttpServlet{
@@ -38,53 +38,56 @@ public class ListController2 extends HttpServlet{
 		//브라우저에서 html로 읽고 UTF-8로 읽어라 하고 헤더에 넣어줌.
 		resp.setContentType("text/html; charset=UTF-8");
 		
-		out.print("hello");
+		HttpSession session = req.getSession();
+		String haha = (String) session.getAttribute("haha");
+		
+		System.out.println(haha);
 		
 //		Menu[] list = service.getList();
 //		int count = service.count();
 
-		String query = "";
-		String sql = String.format("select * from member where nicname like '%s'", "%"+query+"%") ;
-		try {
-			Class.forName("oracle.jdbc.driver.OracleDriver");
-			String url = "jdbc:oracle:thin:@oracle.newlecture.com:1521/xepdb1";
-			Connection con = DriverManager.getConnection(url, "NEWLEC", "rland");
-			
-			Statement st = con.createStatement();
-			ResultSet rs = st.executeQuery(sql);
-			
-//			Menu[] menus = new Menu[100];
-			
-			
-			
-			
-			// 필터링, 집계, 정렬
-			while(rs.next())	// 서버의 커서를 한칸 내리고 그 위치의 레코드를 옮겨 오는 것. -> 레코드 하나가 저장되는 공간은?
-			{
-				int id = rs.getInt("id");
-				String name = rs.getString("name");
-				String nicName = rs.getString("nicname");
-				Date regdate = rs.getDate("reg_date");
-				String images = "pic1.png,pic2.png,pic3.png,pic4.png,pic5.png";
-				
-				Menu menu = new Menu(id, name, 1000, "", regdate, images);
-				menu.setImages(images);
-				
-				menus.add(menu);
-				
-//				menus.add(3);
-			}
-			
-			con.close();
-			
-		} catch (ClassNotFoundException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-		
+//		String query = "";
+//		String sql = String.format("select * from member where nicname like '%s'", "%"+query+"%") ;
+//		try {
+//			Class.forName("oracle.jdbc.driver.OracleDriver");
+//			String url = "jdbc:oracle:thin:@oracle.newlecture.com:1521/xepdb1";
+//			Connection con = DriverManager.getConnection(url, "NEWLEC", "rland");
+//			
+//			Statement st = con.createStatement();
+//			ResultSet rs = st.executeQuery(sql);
+//			
+////			Menu[] menus = new Menu[100];			
+//			
+//			
+//			
+//			
+//			// 필터링, 집계, 정렬
+//			while(rs.next())	// 서버의 커서를 한칸 내리고 그 위치의 레코드를 옮겨 오는 것. -> 레코드 하나가 저장되는 공간은?
+//			{
+//				int id = rs.getInt("id");
+//				String name = rs.getString("name");
+//				String nicName = rs.getString("nicname");
+//				Date regdate = rs.getDate("reg_date");
+//				String images = "pic1.png,pic2.png,pic3.png,pic4.png,pic5.png";
+//				
+//				Menu menu = new Menu(id, name, 1000, "", regdate, images);
+//				menu.setImages(images);
+//				
+//				menus.add(menu);
+//				
+////				menus.add(3);
+//			}
+//			
+//			con.close();
+//			
+//		} catch (ClassNotFoundException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		} catch (SQLException e) {
+//			// TODO Auto-generated catch block
+//			e.printStackTrace();
+//		}
+//		
 //		resp.sendRedirect("listview");
 		
 		//request에 담아둠.

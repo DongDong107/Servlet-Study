@@ -2,22 +2,16 @@ package com.newlecture.web.controller.menu;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
-import com.newlecture.web.entity.GList;
 import com.newlecture.web.entity.Menu;
 import com.newlecture.web.service.DefaultMenuService;
 import com.newlecture.web.service.MenuService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -46,8 +40,19 @@ public class ListController3 extends HttpServlet{
 		
 		PrintWriter out = resp.getWriter();
 		
-		List<Menu> menus = service.getList(); 		
+//		List<Menu> menus = service.getList();
+		List<Menu> menus = new ArrayList<>();
 		
+		//세션
+//		HttpSession session = req.getSession();
+//		session.setAttribute("haha","hoho");
+		
+		Cookie cookie = new Cookie("haha","hoho");
+		// 쿠키 저장 경로 설정.
+		cookie.setPath("/");
+		// 쿠키 저장 시간 설정
+		cookie.setMaxAge(60*24);
+		resp.addCookie(cookie);
 
 		req.setAttribute("menus", menus);
 		
