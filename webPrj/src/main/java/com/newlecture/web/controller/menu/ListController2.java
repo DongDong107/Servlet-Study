@@ -2,13 +2,7 @@ package com.newlecture.web.controller.menu;
 
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.sql.Statement;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 
 import com.newlecture.web.entity.Menu;
@@ -16,6 +10,7 @@ import com.newlecture.web.service.MenuService;
 
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
@@ -41,7 +36,17 @@ public class ListController2 extends HttpServlet{
 		HttpSession session = req.getSession();
 		String haha = (String) session.getAttribute("haha");
 		
-		System.out.println(haha);
+//		System.out.println(haha);
+		
+		Cookie[] cookies = req.getCookies();
+		for (Cookie cookie : cookies) 
+			if(cookie.getName().equals("haha")) {
+				System.out.println(cookie.getValue());
+				break;
+			}
+		
+		
+		
 		
 //		Menu[] list = service.getList();
 //		int count = service.count();
